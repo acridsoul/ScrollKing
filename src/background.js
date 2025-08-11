@@ -1,12 +1,7 @@
 // background.js - Handles background tasks for the extension
 
-// Listen for messages from content script
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  // Handle opening settings page
-  if (message.action === "openSettings") {
-    chrome.runtime.openOptionsPage();
-  }
-});
+// Background script for the extension
+// No message handling needed since settings are now in popup
 
 // Initialize default settings when extension is first installed
 chrome.runtime.onInstalled.addListener(() => {

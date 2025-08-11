@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ScrollKing Settings</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      width: 350px;
+      margin: 0;
+      padding: 20px;
+      color: #333;
+    }
+    
+    h1 {
+      color: #4285f4;
+      text-align: center;
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+    
+    .settings-container {
+      background-color: #f8f8f8;
+      border-radius: 8px;
+      padding: 15px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .setting-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 15px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #eee;
+    }
+    
+    .setting-label {
+      font-weight: bold;
+      font-size: 14px;
+    }
+    
+    .slider-container {
+      width: 200px;
+    }
+    
+    input[type="range"] {
+      width: 100%;
+    }
+    
+    .slider-value {
+      text-align: center;
+      font-weight: bold;
+      color: #4285f4;
+      margin-top: 5px;
+    }
+    
+    .description {
+      font-size: 12px;
+      color: #666;
+      margin-top: 5px;
+    }
+    
+    .save-button {
+      background-color: #4285f4;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      font-size: 14px;
+      border-radius: 4px;
+      cursor: pointer;
+      display: block;
+      margin: 15px auto 0;
+      transition: background-color 0.2s;
+    }
+    
+    .save-button:hover {
+      background-color: #3367d6;
+    }
+    
+    .footer {
+      margin-top: 15px;
+      text-align: center;
+      font-size: 12px;
+      color: #888;
+    }
+    
+    .functionalities {
+      margin: 15px 0;
+    }
+    
+    .functionalities ul {
+      list-style-type: none;
+      padding-left: 10px;
+      font-size: 12px;
+    }
+    
+    .functionalities li {
+      padding: 4px 0;
+      display: flex;
+      align-items: center;
+    }
+    
+    .functionalities li span {
+      margin-left: 8px;
+    }
+    
+    .how-to-use {
+      margin: 15px 0;
+      padding: 10px;
+      background-color: #e8f0fe;
+      border-radius: 6px;
+      font-size: 12px;
+    }
+    
+    .how-to-use h2 {
+      color: #1a73e8;
+      font-size: 16px;
+      margin-top: 0;
+      margin-bottom: 8px;
+    }
+    
+    .hotkey {
+      font-family: monospace;
+      background-color: #f1f1f1;
+      padding: 1px 4px;
+      border-radius: 3px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>ScrollKing Settings</h1>
+  
+  <div class="how-to-use">
+    <h2>How to Use</h2>
+    <p>ScrollKing provides automatic continuous scrolling in any direction:</p>
+    <ol>
+      <li>Click an arrow button to start auto-scrolling in that direction</li>
+      <li>Click the play/pause button (middle) to pause or resume scrolling</li>
+      <li>Press <span class="hotkey">Esc</span> key to immediately stop scrolling</li>
+      <li>Adjust the scroll speed using the slider below</li>
+    </ol>
+  </div>
+  
+  <div class="functionalities">
+    <h2>Functionalities</h2>
+    <ul>
+      <li>↑ <span>Auto-Scroll Page Up</span></li>
+      <li>↓ <span>Auto-Scroll Page Down</span></li>
+      <li>← <span>Auto-Scroll Page Left</span></li>
+      <li>→ <span>Auto-Scroll Page Right</span></li>
+      <li>⏸️/▶️ <span>Pause/Resume Scrolling</span></li>
+    </ul>
+  </div>
+  
+  <div class="settings-container">
+    <div class="setting-row">
+      <div class="setting-label">
+        Auto-Scroll Speed (1-10)
+        <div class="description">Adjust how fast the page automatically scrolls</div>
+      </div>
+      <div class="slider-container">
+        <input type="range" id="speed-slider" min="1" max="10" step="1" value="5">
+        <div class="slider-value" id="speed-value">5</div>
+      </div>
+    </div>
+    
+    <button class="save-button" id="save-settings">Save Settings</button>
+  </div>
+  
+  <div class="footer">
+    ScrollKing v1.0.0 - Continuous auto-scroll for every website
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html> 

@@ -25,12 +25,7 @@ function createFloatingNavigation() {
   playPauseButton.title = 'Start/Stop Scrolling';
   playPauseButton.addEventListener('click', toggleScrolling);
   
-  // Create settings button (cog icon)
-  const settingsButton = document.createElement('button');
-  settingsButton.id = 'scroll-king-settings';
-  settingsButton.innerHTML = '⚙️';
-  settingsButton.title = 'Settings';
-  settingsButton.addEventListener('click', openSettings);
+
   
   // Create arrow layout container
   const arrowContainer = document.createElement('div');
@@ -55,10 +50,9 @@ function createFloatingNavigation() {
   statusIndicator.id = 'scroll-king-status';
   statusIndicator.textContent = 'Idle';
   
-  // Add arrows and settings button to container
+  // Add arrows to container
   navContainer.appendChild(arrowContainer);
   navContainer.appendChild(statusIndicator);
-  navContainer.appendChild(settingsButton);
   
   // Add the container to the page
   document.body.appendChild(navContainer);
@@ -231,16 +225,15 @@ function makeDraggable(element) {
   }
 }
 
-// Function to open settings page
-function openSettings() {
-  chrome.runtime.sendMessage({ action: "openSettings" });
-}
+
 
 // Load saved settings from storage
 function loadSettings() {
   chrome.storage.sync.get(['scrollSpeed', 'position', 'lastDirection'], function(data) {
+    console.log('Content: Loaded settings:', data);
     if (data.scrollSpeed) {
       scrollSpeed = data.scrollSpeed;
+      console.log('Content: Set scroll speed to:', scrollSpeed);
     }
     
     // Restore last scrolling direction
@@ -273,8 +266,10 @@ function init() {
   
   // Listen for settings updates
   chrome.storage.onChanged.addListener((changes) => {
+    console.log('Content: Storage changed:', changes);
     if (changes.scrollSpeed) {
       scrollSpeed = changes.scrollSpeed.newValue;
+      console.log('Content: Speed updated to:', scrollSpeed);
       // If currently scrolling, adjust speed dynamically
       if (isScrolling && scrollInterval) {
         stopScrolling();
