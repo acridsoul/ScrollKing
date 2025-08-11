@@ -1,0 +1,6 @@
+<!-- Simple SVG icon for ScrollKing -->
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+  <rect width="48" height="48" fill="#4285f4" rx="8" ry="8"/>
+  <path d="M24 9L36 21H30V30H18V21H12L24 9Z" fill="white"/>
+  <path d="M9 24L21 36V30H30V24H21V18L9 24Z" fill="white"/>
+</svg>

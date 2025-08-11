@@ -1,0 +1,114 @@
+/* content.css - Styles for the floating navigation */
+
+#scroll-king-nav {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: move; /* Indicate it's draggable */
+  user-select: none;
+}
+
+.scroll-king-arrows {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.scroll-king-row {
+  display: flex;
+  align-items: center;
+}
+
+.scroll-king-arrow {
+  width: 40px;
+  height: 40px;
+  margin: 3px;
+  border-radius: 50%;
+  border: none;
+  background-color: #4285f4;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.2s;
+}
+
+.scroll-king-arrow:hover {
+  background-color: #3367d6;
+}
+
+/* Style for the play/pause button */
+#scroll-king-play-pause {
+  width: 40px;
+  height: 40px;
+  margin: 3px;
+  border-radius: 50%;
+  border: none;
+  background-color: #34a853;  /* Green color for play */
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.2s;
+}
+
+#scroll-king-play-pause:hover {
+  background-color: #2e7d32;
+}
+
+/* Status indicator styling */
+#scroll-king-status {
+  margin: 8px 0;
+  font-size: 12px;
+  color: #666;
+  text-align: center;
+  font-weight: bold;
+  padding: 4px 8px;
+  border-radius: 10px;
+  background-color: #f1f1f1;
+  min-width: 80px;
+  transition: all 0.3s;
+}
+
+#scroll-king-status.active {
+  background-color: #e8f0fe;
+  color: #1a73e8;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 0.8; }
+  50% { opacity: 1; }
+  100% { opacity: 0.8; }
+}
+
+#scroll-king-settings {
+  margin-top: 10px;
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.2s;
+}
+
+#scroll-king-settings:hover {
+  background-color: #e0e0e0;
+}
