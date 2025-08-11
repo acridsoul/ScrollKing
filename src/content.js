@@ -4,7 +4,8 @@
 let scrollSpeed = 5;
 let isScrolling = false;
 let scrollDirection = null;
-let scrollInterval = null;
+let animationId = null;
+let lastFrameTime = 0;
 
 // Create the floating navigation container
 function createFloatingNavigation() {
@@ -85,25 +86,34 @@ function startScrolling(direction) {
   // Update status
   scrollDirection = direction;
   isScrolling = true;
+  lastFrameTime = performance.now();
   updatePlayPauseButton();
   updateStatusIndicator();
   
-  // Start interval for continuous scrolling
-  scrollInterval = setInterval(() => {
-    performScroll(direction);
-  }, 50); // Adjust timing for smoother scrolling
+  // Start smooth scrolling with requestAnimationFrame
+  animateScroll(direction);
 }
 
-// Function to perform a single scroll step
-function performScroll(direction) {
-  // Calculate scroll amount based on speed
-  const scrollAmount = scrollSpeed * 2;  // Base scroll amount per step
+// Function to perform smooth scrolling animation
+function animateScroll(direction) {
+  if (!isScrolling) return;
   
+  const currentTime = performance.now();
+  const deltaTime = currentTime - lastFrameTime;
+  lastFrameTime = currentTime;
+  
+  // Calculate scroll amount based on time elapsed and speed
+  // Base speed: 100px per second, adjusted by scrollSpeed (1-10)
+  const baseSpeed = 100; // pixels per second
+  const speedMultiplier = scrollSpeed / 5; // Normalize to 1-2 range
+  const scrollAmount = (baseSpeed * speedMultiplier * deltaTime) / 1000;
+  
+  // Perform the scroll
   switch(direction) {
     case 'up':
       window.scrollBy({
         top: -scrollAmount,
-        behavior: 'auto' // Using 'auto' for smoother continuous scrolling
+        behavior: 'auto'
       });
       break;
     case 'down':
@@ -125,13 +135,18 @@ function performScroll(direction) {
       });
       break;
   }
+  
+  // Continue animation if still scrolling
+  if (isScrolling) {
+    animationId = requestAnimationFrame(() => animateScroll(direction));
+  }
 }
 
 // Function to stop scrolling
 function stopScrolling() {
-  if (scrollInterval) {
-    clearInterval(scrollInterval);
-    scrollInterval = null;
+  if (animationId) {
+    cancelAnimationFrame(animationId);
+    animationId = null;
   }
   isScrolling = false;
   updatePlayPauseButton();
@@ -270,18 +285,15 @@ function init() {
     if (changes.scrollSpeed) {
       scrollSpeed = changes.scrollSpeed.newValue;
       console.log('Content: Speed updated to:', scrollSpeed);
-      // If currently scrolling, adjust speed dynamically
-      if (isScrolling && scrollInterval) {
-        stopScrolling();
-        startScrolling(scrollDirection);
-      }
+      // Speed changes are automatically applied in the next animation frame
+      // No need to restart scrolling
     }
   });
   
   // Clean up when leaving the page
   window.addEventListener('beforeunload', () => {
-    if (scrollInterval) {
-      clearInterval(scrollInterval);
+    if (animationId) {
+      cancelAnimationFrame(animationId);
     }
     saveScrollState();
   });
