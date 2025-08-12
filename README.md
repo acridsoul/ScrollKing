@@ -86,6 +86,41 @@ ScrollKing/
 - **Non-Intrusive**: Transparent floating panel that doesn't interfere with page content
 - **Accessible**: Keyboard shortcuts and clear visual indicators
 
+## TODO - Future Improvements
+
+### Critical Issues
+- [ ] **Fix Icon Issue**: Convert SVG icons to actual PNG files or update manifest to use SVG
+  - Current PNG files are placeholders and will prevent extension from loading
+  - Need to generate proper 16x16, 48x48, and 128x128 PNG icons
+
+### Code Quality Improvements
+- [ ] **Add Error Handling**: Wrap storage operations in try-catch blocks
+- [ ] **Clean Up Code**: Remove extra whitespace in content.js line 25
+- [ ] **Add Background Color**: Add background color to floating nav container for better visibility
+
+### Feature Enhancements
+- [ ] **Mobile Support**: Add touch event handling for mobile devices
+  - Implement touchstart, touchmove, touchend events
+  - Add touch-friendly button sizing
+- [ ] **Accessibility Features**: Improve accessibility compliance
+  - Add ARIA labels to all interactive elements
+  - Implement keyboard navigation (Tab, Enter, Space)
+  - Add screen reader support
+- [ ] **Scroll Boundaries**: Add detection for scroll boundaries
+  - Stop scrolling when reaching top/bottom/left/right of page
+  - Visual feedback when at scroll limits
+- [ ] **Additional Customization**: Expand settings options
+  - Custom scroll speeds (not just 1-10)
+  - Button size customization
+  - Color theme options
+  - Auto-hide controls option
+
+### Performance & UX
+- [ ] **Smart Positioning**: Prevent controls from going off-screen
+- [ ] **Context Awareness**: Hide controls on certain page types (PDFs, videos)
+- [ ] **Gesture Support**: Add mouse wheel integration for speed adjustment
+- [ ] **Visual Enhancements**: Add smooth transitions and micro-interactions
+
 ## License
 
 MIT License
