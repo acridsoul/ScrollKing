@@ -4,15 +4,15 @@
   "version": "1.0.0",
   "description": "A Chrome extension that adds auto-scroll controls on every website for continuous scrolling",
   "icons": {
-    "16": "images/icon16.png",
-    "48": "images/icon48.png",
-    "128": "images/icon128.png"
+    "16": "images/icons/icon16.png",
+    "48": "images/icons/icon48.png",
+    "128": "images/icons/icon128.png"
   },
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
-      "16": "images/icon16.png",
-      "48": "images/icon48.png"
+      "16": "images/icons/icon16.png",
+      "48": "images/icons/icon48.png"
     },
     "default_title": "ScrollKing"
   },
@@ -26,5 +26,11 @@
   "background": {
     "service_worker": "src/background.js"
   },
-  "permissions": ["storage"]
+  "permissions": ["storage"],
+  "web_accessible_resources": [
+    {
+      "resources": ["images/arrows/*"],
+      "matches": ["<all_urls>"]
+    }
+  ]
 }

@@ -14,15 +14,32 @@ function createFloatingNavigation() {
   navContainer.id = 'scroll-king-nav';
   
   // Create arrow buttons
-  const upArrow = createArrowButton('up', '↑');
-  const leftArrow = createArrowButton('left', '←');
-  const rightArrow = createArrowButton('right', '→');
-  const downArrow = createArrowButton('down', '↓');
+  const upArrow = createArrowButton('up', 'images/arrows/up-arrow.png');
+  const leftArrow = createArrowButton('left', 'images/arrows/left-arrow.png');
+  const rightArrow = createArrowButton('right', 'images/arrows/right-arrow.png');
+  const downArrow = createArrowButton('down', 'images/arrows/down-arrow.png');
   
   // Create play/pause button
   const playPauseButton = document.createElement('button');
   playPauseButton.id = 'scroll-king-play-pause';
-  playPauseButton.innerHTML = '▶️';
+  
+  // Create play image
+  const playImg = document.createElement('img');
+  playImg.src = chrome.runtime.getURL('images/arrows/play.png');
+  playImg.alt = 'Start Scrolling';
+  playImg.className = 'scroll-king-play-pause-img';
+  playImg.id = 'scroll-king-play-img';
+  
+  // Create pause image
+  const pauseImg = document.createElement('img');
+  pauseImg.src = chrome.runtime.getURL('images/arrows/pause.png');
+  pauseImg.alt = 'Pause Scrolling';
+  pauseImg.className = 'scroll-king-play-pause-img';
+  pauseImg.id = 'scroll-king-pause-img';
+  pauseImg.style.display = 'none';
+  
+  playPauseButton.appendChild(playImg);
+  playPauseButton.appendChild(pauseImg);
   playPauseButton.title = 'Start/Stop Scrolling';
   playPauseButton.addEventListener('click', toggleScrolling);
   
@@ -63,10 +80,17 @@ function createFloatingNavigation() {
 }
 
 // Helper function to create arrow buttons
-function createArrowButton(direction, symbol) {
+function createArrowButton(direction, imagePath) {
   const button = document.createElement('button');
   button.className = `scroll-king-arrow scroll-king-${direction}`;
-  button.innerHTML = symbol;
+  
+  // Create image element
+  const img = document.createElement('img');
+  img.src = chrome.runtime.getURL(imagePath);
+  img.alt = `Auto-scroll ${direction}`;
+  img.className = 'scroll-king-arrow-img';
+  
+  button.appendChild(img);
   button.title = `Auto-scroll ${direction}`;
   
   button.addEventListener('click', () => {
@@ -164,14 +188,16 @@ function toggleScrolling() {
 
 // Update the play/pause button based on scroll state
 function updatePlayPauseButton() {
-  const playPauseButton = document.getElementById('scroll-king-play-pause');
-  if (playPauseButton) {
+  const playImg = document.getElementById('scroll-king-play-img');
+  const pauseImg = document.getElementById('scroll-king-pause-img');
+  
+  if (playImg && pauseImg) {
     if (isScrolling) {
-      playPauseButton.innerHTML = '⏸️';
-      playPauseButton.title = 'Pause Scrolling';
+      playImg.style.display = 'none';
+      pauseImg.style.display = 'block';
     } else {
-      playPauseButton.innerHTML = '▶️';
-      playPauseButton.title = 'Resume Scrolling';
+      playImg.style.display = 'block';
+      pauseImg.style.display = 'none';
     }
   }
 }
