@@ -91,13 +91,57 @@ function createArrowButton(direction, imagePath) {
   img.className = 'scroll-king-arrow-img';
   
   button.appendChild(img);
-  button.title = `Auto-scroll ${direction}`;
   
-  button.addEventListener('click', () => {
-    startScrolling(direction);
-  });
+  // Set different titles and click handlers based on direction
+  if (direction === 'left' || direction === 'right') {
+    // Browser navigation for left/right arrows
+    const action = direction === 'left' ? 'Go Back' : 'Go Forward';
+    button.title = action;
+    button.addEventListener('click', () => {
+      if (direction === 'left') {
+        goBack();
+      } else {
+        goForward();
+      }
+    });
+  } else {
+    // Vertical scrolling for up/down arrows
+    button.title = `Auto-scroll ${direction}`;
+    button.addEventListener('click', () => {
+      startScrolling(direction);
+    });
+  }
   
   return button;
+}
+
+// Browser navigation functions
+function goBack() {
+  if (window.history.length > 1) {
+    updateStatusIndicator('Going back...');
+    setTimeout(() => {
+      window.history.back();
+    }, 100);
+  } else {
+    updateStatusIndicator('No back history');
+    setTimeout(() => {
+      updateStatusIndicator('Idle');
+    }, 2000);
+  }
+}
+
+function goForward() {
+  if (window.history.length > 1) {
+    updateStatusIndicator('Going forward...');
+    setTimeout(() => {
+      window.history.forward();
+    }, 100);
+  } else {
+    updateStatusIndicator('No forward history');
+    setTimeout(() => {
+      updateStatusIndicator('Idle');
+    }, 2000);
+  }
 }
 
 // Function to start auto-scrolling in the specified direction
@@ -132,7 +176,7 @@ function animateScroll(direction) {
   const speedMultiplier = scrollSpeed / 5; // Normalize to 1-2 range
   const scrollAmount = (baseSpeed * speedMultiplier * deltaTime) / 1000;
   
-  // Perform the scroll
+  // Perform the scroll (only vertical directions now)
   switch(direction) {
     case 'up':
       window.scrollBy({
@@ -146,18 +190,7 @@ function animateScroll(direction) {
         behavior: 'auto'
       });
       break;
-    case 'left':
-      window.scrollBy({
-        left: -scrollAmount,
-        behavior: 'auto'
-      });
-      break;
-    case 'right':
-      window.scrollBy({
-        left: scrollAmount,
-        behavior: 'auto'
-      });
-      break;
+    // Left and right are now handled by browser navigation functions
   }
   
   // Continue animation if still scrolling
@@ -203,10 +236,13 @@ function updatePlayPauseButton() {
 }
 
 // Update the status indicator
-function updateStatusIndicator() {
+function updateStatusIndicator(customText = null) {
   const statusIndicator = document.getElementById('scroll-king-status');
   if (statusIndicator) {
-    if (isScrolling) {
+    if (customText) {
+      statusIndicator.textContent = customText;
+      statusIndicator.classList.add('active');
+    } else if (isScrolling) {
       statusIndicator.textContent = `Scrolling ${scrollDirection}`;
       statusIndicator.classList.add('active');
     } else {

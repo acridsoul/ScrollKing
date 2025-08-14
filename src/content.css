@@ -48,6 +48,12 @@
   background-color: #3367d6;
 }
 
+/* Navigation arrow specific styling */
+.scroll-king-left:hover,
+.scroll-king-right:hover {
+  background-color: #ff6b35; /* Orange color for navigation */
+}
+
 /* Arrow image styling */
 .scroll-king-arrow-img {
   width: 100%;
@@ -63,8 +69,8 @@
   margin: 3px;
   border-radius: 50%;
   border: none;
-  background-color: #34a853;  /* Green color for play */
-  color: white;
+  /* background-color: #34a853; */
+  /* color: white; */
   font-size: 20px;
   cursor: pointer;
   display: flex;
@@ -73,9 +79,6 @@
   transition: background-color 0.2s;
 }
 
-#scroll-king-play-pause:hover {
-  background-color: #2e7d32;
-}
 
 /* Play/pause image styling */
 .scroll-king-play-pause-img {
